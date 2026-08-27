@@ -1,0 +1,39 @@
+name: Build Yam Notes APK
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [yam-notes-apk-build]
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.head_commit.message, '[built-apk]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: yam-notes-apk-build
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install SDK
+        run: yes | sdkmanager --licenses >/dev/null || true; sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Build APK
+        working-directory: yam-notes
+        run: gradle --no-daemon assembleDebug
+      - name: Save APK to branch
+        run: |
+          mkdir -p build-output
+          cp yam-notes/app/build/outputs/apk/debug/app-debug.apk build-output/Yam-Notes-Pro-v1.0.0.apk
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add build-output/Yam-Notes-Pro-v1.0.0.apk
+          git commit -m "build: Yam Notes Pro APK [built-apk] [skip ci]"
+          git push origin HEAD:yam-notes-apk-build
