@@ -1,0 +1,22 @@
+package com.yamlo.notes;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
+public class MainActivity extends Activity {
+    private WebView webView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        webView = new WebView(this);
+        WebSettings s = webView.getSettings();
+        s.setJavaScriptEnabled(true);
+        s.setDomStorageEnabled(true);
+        webView.setLayoutDirection(WebView.LAYOUT_DIRECTION_RTL);
+        webView.loadUrl("file:///android_asset/index.html");
+        setContentView(webView);
+    }
+}
