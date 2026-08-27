@@ -3,7 +3,6 @@ package com.yamlo.notes;
 import android.app.*;
 import android.content.*;
 import android.os.Build;
-import androidx.annotation.Nullable;
 
 public class ReminderReceiver extends BroadcastReceiver {
     public static final String CHANNEL_ID = "yam_notes_reminders";
