@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
         webView.setLayoutDirection(WebView.LAYOUT_DIRECTION_RTL);
-        webView.loadUrl("file:///android_asset/index.html");
+        webView.loadUrl("file:///android_asset/pro.html");
         setContentView(webView);
     }
 }
