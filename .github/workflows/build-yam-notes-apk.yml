@@ -31,9 +31,9 @@ jobs:
       - name: Save APK to branch
         run: |
           mkdir -p build-output
-          cp yam-notes/app/build/outputs/apk/debug/app-debug.apk build-output/Yam-Notes-Pro-v2.0.0.apk
+          cp yam-notes/app/build/outputs/apk/debug/app-debug.apk build-output/Yam-Notes-Pro-v3.0.0.apk
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add build-output/Yam-Notes-Pro-v2.0.0.apk
-          git commit -m "build: Yam Notes Pro 2.0 APK [built-apk] [skip ci]"
+          git add build-output/Yam-Notes-Pro-v3.0.0.apk
+          git commit -m "build: Yam Notes Pro 3.0 APK [built-apk] [skip ci]"
           git push origin HEAD:yam-notes-apk-build
